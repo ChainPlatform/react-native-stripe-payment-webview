@@ -1,0 +1,33 @@
+{
+  "name": "react-native-stripe-payment-webview",
+  "version": "0.1.0",
+  "description": "The library allows you to use Stripe Payment with react-native without ejecting support both react-native and react-native-web.",
+  "main": "index.js",
+  "devDependencies": {
+    "react": ">=16.0.0",
+    "react-native": ">=0.60.0",
+    "react-native-web": ">=0.19.0"
+  },
+  "author": "Chain Platform <santran686@gmail.com> (https://chainplatform.net/)",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-web",
+    "react-native-webview",
+    "react-native-stripe-payment-webview",
+    "react-native-stripe-payment",
+    "react-native-stripe"
+  ],
+  "homepage": "https://github.com/ChainPlatform/react-native-stripe-payment-webview",
+  "bugs": "https://github.com/ChainPlatform/pull-to-refresh/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ChainPlatform/react-native-stripe-payment-webview.git"
+  },
+  "dependencies": {
+    "react": ">=16.0.0",
+    "react-native": ">=0.60.0",
+    "react-native-webview": ">=10.0.0"
+  }
+}
