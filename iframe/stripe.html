@@ -141,10 +141,24 @@
             }
         }
     </style>
-    <script src="https://js.stripe.com/v3"></script>
+</head>
+
+<body>
+    <form id="payment-form">
+        <div id="payment-element"></div>
+        <button id="submit">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text" class="hidden">Pay now</span>
+        </button>
+        <div id="payment-message" class="hidden"></div>
+    </form>
     <script>
         const parsedUrl = new URL(window.location.href), return_url = parsedUrl.searchParams.get("return_url"), public_key = parsedUrl.searchParams.get("public_key"), client_secret = parsedUrl.searchParams.get("client_secret");
         let clientSecret; let strip; let elements;
+
+        let tag = document.createElement('script');
+        tag.src = `https://js.stripe.com/v3`;
+
         function handleSubmit(e) {
             e.preventDefault();
             setLoading(true);
@@ -174,7 +188,8 @@
                 document.querySelector("#button-text").classList.remove("hidden");
             }
         }
-        document.addEventListener("DOMContentLoaded", () => {
+
+        tag.onload = () => {
             stripe = Stripe(`${public_key}`);
             clientSecret = `${client_secret}`;
             document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
@@ -183,19 +198,11 @@
             const paymentElement = elements.create("payment", paymentOptions);
             document.querySelector("#button-text").classList.remove("hidden");
             paymentElement.mount("#payment-element");
-        });
+        };
+        tag.onerror = () => { };
+        let firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
-</head>
-
-<body>
-    <form id="payment-form">
-        <div id="payment-element"></div>
-        <button id="submit">
-            <div class="spinner hidden" id="spinner"></div>
-            <span id="button-text" class="hidden">Pay now</span>
-        </button>
-        <div id="payment-message" class="hidden"></div>
-    </form>
 </body>
 
 </html>

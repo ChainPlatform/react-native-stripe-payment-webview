@@ -124,49 +124,6 @@ export function stripeHTML(public_key = "", client_secret = "", return_url = "")
                 }
               }
             </style>
-            <script src="https://js.stripe.com/v3"></script>
-            <script>
-                let clientSecret; let strip; let elements;
-                function handleSubmit(e) {
-                    e.preventDefault();
-                    setLoading(true);
-                    stripe.confirmPayment({
-                        elements,
-                        confirmParams: {
-                            return_url: '${return_url != "" ? return_url : "https://google.com"}',
-                        },
-                        redirect: 'if_required',
-                    }).then(function(result) {
-                        if (typeof window.parent != "undefined") {
-                            window.parent.postMessage(JSON.stringify(result));
-                        } else {
-                            window.postMessage(JSON.stringify(result));
-                        }
-                        setLoading(false);
-                    });
-                }
-                function setLoading(isLoading) {
-                    if (isLoading) {
-                        document.querySelector("#submit").disabled = true;
-                        document.querySelector("#spinner").classList.remove("hidden");
-                        document.querySelector("#button-text").classList.add("hidden");
-                    } else {
-                        document.querySelector("#submit").disabled = false;
-                        document.querySelector("#spinner").classList.add("hidden");
-                        document.querySelector("#button-text").classList.remove("hidden");
-                    }
-                }
-                document.addEventListener("DOMContentLoaded", () => {
-                    stripe = Stripe('${public_key}');
-                    clientSecret = '${client_secret}';
-                    document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
-                    elements = stripe.elements({clientSecret});
-                    const paymentOptions = {layout: "tabs"};
-                    const paymentElement = elements.create("payment", paymentOptions);
-                    document.querySelector("#button-text").classList.remove("hidden");
-                    paymentElement.mount("#payment-element");
-                });
-            </script>
             </head>
             <body>
                 <form id="payment-form">
@@ -177,6 +134,56 @@ export function stripeHTML(public_key = "", client_secret = "", return_url = "")
                     </button>
                     <div id="payment-message" class="hidden"></div>
                 </form>
+                <script>
+                    let clientSecret; let strip; let elements;
+
+                    let tag = document.createElement('script');
+                    tag.src = 'https://js.stripe.com/v3';
+
+                    function handleSubmit(e) {
+                        e.preventDefault();
+                        setLoading(true);
+                        stripe.confirmPayment({
+                            elements,
+                            confirmParams: {
+                                return_url: '${return_url != "" ? return_url : "https://google.com"}',
+                            },
+                            redirect: 'if_required',
+                        }).then(function(result) {
+                            if (typeof window.parent != "undefined") {
+                                window.parent.postMessage(JSON.stringify(result));
+                            } else {
+                                window.postMessage(JSON.stringify(result));
+                            }
+                            setLoading(false);
+                        });
+                    }
+                    function setLoading(isLoading) {
+                        if (isLoading) {
+                            document.querySelector("#submit").disabled = true;
+                            document.querySelector("#spinner").classList.remove("hidden");
+                            document.querySelector("#button-text").classList.add("hidden");
+                        } else {
+                            document.querySelector("#submit").disabled = false;
+                            document.querySelector("#spinner").classList.add("hidden");
+                            document.querySelector("#button-text").classList.remove("hidden");
+                        }
+                    }
+
+                    tag.onload = () => {
+                        stripe = Stripe('${public_key}');
+                        clientSecret = '${client_secret}';
+                        document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
+                        elements = stripe.elements({ clientSecret });
+                        const paymentOptions = { layout: "tabs" };
+                        const paymentElement = elements.create("payment", paymentOptions);
+                        document.querySelector("#button-text").classList.remove("hidden");
+                        paymentElement.mount("#payment-element");
+                    };
+                    tag.onerror = () => { };
+                    let firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                </script>
             </body>
         </html>`
 }
