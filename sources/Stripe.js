@@ -150,11 +150,7 @@ export function stripeHTML(public_key = "", client_secret = "", return_url = "")
                             },
                             redirect: 'if_required',
                         }).then(function(result) {
-                            if (typeof window.parent != "undefined") {
-                                window.parent.postMessage(JSON.stringify(result));
-                            } else {
-                                window.postMessage(JSON.stringify(result));
-                            }
+                            (window.ReactNativeWebView || window.parent || window).postMessage(JSON.stringify(result), '*');
                             setLoading(false);
                         });
                     }
