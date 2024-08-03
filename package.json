@@ -1,6 +1,6 @@
 {
   "name": "react-native-stripe-payment-webview",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "The library allows you to use Stripe Payment with react-native without ejecting support both react-native and react-native-web.",
   "main": "index.js",
   "devDependencies": {
