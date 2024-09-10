@@ -1,4 +1,4 @@
-export function stripeHTML(public_key = "", client_secret = "", return_url = "", theme = "light") {
+export function stripeHTML(public_key = "", client_secret = "", return_url = "", theme = "light", style = "night") {
     return `<!DOCTYPE html>
         <html lang="en">
           <head>
@@ -168,10 +168,13 @@ export function stripeHTML(public_key = "", client_secret = "", return_url = "",
 
                     tag.onload = () => {
                         document.documentElement.style.colorScheme = '${theme}';
+                        const appearance = {
+                            theme: '${style}'
+                        };
                         stripe = Stripe('${public_key}');
                         clientSecret = '${client_secret}';
                         document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
-                        elements = stripe.elements({ clientSecret });
+                        elements = stripe.elements({ clientSecret, appearance });
                         const paymentOptions = { layout: "tabs" };
                         const paymentElement = elements.create("payment", paymentOptions);
                         document.querySelector("#button-text").classList.remove("hidden");

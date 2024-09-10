@@ -16,10 +16,11 @@ export default class StripePayment extends Component {
         const public_key = typeof this.props.public_key != "undefined" ? this.props.public_key : "";
         const client_secret = typeof this.props.client_secret != "undefined" ? this.props.client_secret : "";
         const theme = typeof this.props.theme != "undefined" ? this.props.theme : "light";
+        const style = typeof this.props.style != "undefined" ? this.props.style : "night";
         if (typeof this.props.useRemote != "undefined" && this.props.useRemote == true) {
-            loadContent = { uri: DEFAULT_STRIPE_URL + '?return_url=' + return_url + '&public_key=' + public_key + '&client_secret=' + client_secret + '&theme=' + theme };
+            loadContent = { uri: DEFAULT_STRIPE_URL + '?return_url=' + return_url + '&public_key=' + public_key + '&client_secret=' + client_secret + '&theme=' + theme + '&style=' + style };
         } else {
-            loadContent = { html: stripeHTML(public_key, client_secret, return_url, theme) };
+            loadContent = { html: stripeHTML(public_key, client_secret, return_url, theme, style) };
         }
         return loadContent;
     }

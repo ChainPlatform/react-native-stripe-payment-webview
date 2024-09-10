@@ -61,7 +61,8 @@ import StripePayment from 'react-native-stripe-payment-webview';
 
 ```js
     <StripePayment
-        theme={"stripe"}
+        theme={"light"}
+        style={"stripe"}
         return_url={"https://google.com"}
         public_key={datas.payment_infos.datas.publishable_key}
         client_secret={datas.payment_infos.datas.client_secret}
@@ -73,7 +74,8 @@ import StripePayment from 'react-native-stripe-payment-webview';
 
 ## Component props
 
-- `theme` (String) - Stripe layout theme
+- `theme` (String) - theme dark or light
+- `style` (String) - Stripe layout theme
 - `return_url` (String) - optional.
 - `publishable_key` (String) - Stripe public key of your project.
 - `client_secret` (String) - String to be passed to Stripe's `paymentIntent` function. [Docs](https://docs.stripe.com/payments/quickstart?client=html).

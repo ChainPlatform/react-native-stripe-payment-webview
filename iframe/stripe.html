@@ -157,7 +157,8 @@
             return_url = parsedUrl.searchParams.get("return_url"),
             public_key = parsedUrl.searchParams.get("public_key"),
             client_secret = parsedUrl.searchParams.get("client_secret"),
-            theme = parsedUrl.searchParams.get("theme");
+            theme = parsedUrl.searchParams.get("theme"),
+            style = parsedUrl.searchParams.get("style");
         let clientSecret; let strip; let elements;
 
         let tag = document.createElement('script');
@@ -191,10 +192,13 @@
 
         tag.onload = () => {
             document.documentElement.style.colorScheme = `${theme}`;
+            const appearance = {
+                theme: `${style}`
+            };
             stripe = Stripe(`${public_key}`);
             clientSecret = `${client_secret}`;
             document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
-            elements = stripe.elements({ clientSecret });
+            elements = stripe.elements({ clientSecret, appearance });
             const paymentOptions = { layout: "tabs" };
             const paymentElement = elements.create("payment", paymentOptions);
             document.querySelector("#button-text").classList.remove("hidden");
