@@ -1,11 +1,26 @@
 # React Native Stripe Payment and React Native Web Stripe Payment
  The library allows you to use Stripe Payment with react-native without ejecting support both react-native and react-native-web.
 
-<a href="https://npmjs.com/package/react-native-stripe-payment-webview">
-  <img src="https://img.shields.io/npm/v/react-native-stripe-payment-webview.svg"></img>
-  <img src="https://img.shields.io/npm/dt/react-native-stripe-payment-webview.svg"></img>
-</a>
-<a href="https://twitter.com/intent/follow?screen_name=doansan"><img src="https://img.shields.io/twitter/follow/doansan.svg?label=Follow%20@doansan" alt="Follow @doansan"></img></a>
+<p align="center">
+  <a href="https://github.com/ChainPlatform/react-native-stripe-payment-webview/blob/HEAD/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" />
+  </a>
+  <a href="https://www.npmjs.com/package/react-native-stripe-payment-webview">
+    <img src="https://img.shields.io/npm/v/react-native-stripe-payment-webview?color=brightgreen&label=npm%20package" alt="Current npm package version." />
+  </a>
+  <a href="https://www.npmjs.com/package/react-native-stripe-payment-webview">
+    <img src="https://img.shields.io/npm/dt/react-native-stripe-payment-webview.svg"></img>
+  </a>
+  <a href="https://www.npmjs.com/package/react-native-stripe-payment-webview">
+    <img src="https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20web-blue"></img>
+  </a>
+  <a href="https://github.com/ChainPlatform/react-native-stripe-payment-webview/pulls">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
+  </a>
+  <a href="https://twitter.com/intent/follow?screen_name=doansan">
+    <img src="https://img.shields.io/twitter/follow/doansan.svg?label=Follow%20@doansan" alt="Follow @doansan" />
+  </a>
+</p>
 
 
 <p align="center">
@@ -46,6 +61,7 @@ import StripePayment from 'react-native-stripe-payment-webview';
 
 ```js
     <StripePayment
+        theme={"stripe"}
         return_url={"https://google.com"}
         public_key={datas.payment_infos.datas.publishable_key}
         client_secret={datas.payment_infos.datas.client_secret}
@@ -57,6 +73,7 @@ import StripePayment from 'react-native-stripe-payment-webview';
 
 ## Component props
 
+- `theme` (String) - Stripe layout theme
 - `return_url` (String) - optional.
 - `publishable_key` (String) - Stripe public key of your project.
 - `client_secret` (String) - String to be passed to Stripe's `paymentIntent` function. [Docs](https://docs.stripe.com/payments/quickstart?client=html).
